@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+permalink: web3-html
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+    <script src="./node_modules/ethereumjs-tx/dist/index.js"></script>
+ </head>
+<body>
+    <div class="container">
+
+        <h1>Info Contract</h1>
+
+        <h2 id="info"></h2>
+
+        <label for="name" class="col-lg-2 control-label">Name</label>
+        <input id="name" type="text">
+
+        <label for="name" class="col-lg-2 control-label">Age</label>
+        <input id="age" type="text">
+
+        <button id="button">Update Info</button>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <script>
+
+    if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+        console.log("1")
+    } else {
+        // set the provider you want from Web3.providers
+        web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/18520ccfd2e848bea8e5b2431b64308c"));
+        console.log("2")
+     }
+    web3.eth.defaultAccount = web3.eth.accounts[0];
+
+
+const abi = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "latitude",
+				"type": "uint256"
+			},
+			{
+				"name": "langitude",
+				"type": "uint256"
+			}
+		],
+		"name": "addPosition",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "OrderIndentifier",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "OrderCreatedTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "OrderStatus",
+				"type": "string"
+			}
+		],
+		"name": "Created",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "OrderIndentifier",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "CurrentLocation",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "OrderTime",
+				"type": "uint256"
+			}
+		],
+		"name": "Done",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "getPosition",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "latitude",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"name": "langitude",
+				"type": "uint256[]"
+			}
+		],
+		"name": "GetPosition",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "NewOrder",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_from",
+				"type": "string"
+			},
+			{
+				"name": "_to",
+				"type": "string"
+			}
+		],
+		"name": "Starting",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "string"
+			},
+			{
+				"name": "b",
+				"type": "string"
+			}
+		],
+		"name": "JudgeString",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "Length",
+				"type": "uint256"
+			}
+		],
+		"name": "RandomNum",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+let stringtoHex = function (str) {
+    var val = "";
+    for (var i = 0; i < str.length; i++) {
+        if (val == "")
+            val = str.charCodeAt(i).toString(16);
+        else
+            val += str.charCodeAt(i).toString(16);
+    }
+    val += "0a"
+    return val
+}
+
+const address = '0x0764FdD2A081EA315c0EE1d7022768165AC3190F'
+
+const contract = new web3.eth.Contract(abi, address)
+const account1 = '0x4BCA8987e713b882553b5eAD3d1CF85afBDF001e';
+const pk1='2e4ee773a8e1bbba0e30896e758ea003b53991999d310434e07171abb8b11a31' 
+const privateKey1 = stringtoHex(pk1);
+web3.eth.getBalance("0x4BCA8987e713b882553b5eAD3d1CF85afBDF001e", (err, wei) => {
+balance = web3.utils.fromWei(wei, 'ether')
+console.log("balance: " + balance)
+})
+
+// CryptoZombies.methods.createRandomZombie("Vitalik Nakamoto")
+web3.eth.getTransactionCount(account1, (err, txCount) => {
+// 创建交易对象
+const txObject = {
+  nonce:    web3.utils.toHex(txCount),
+  gasLimit: web3.utils.toHex(8000000),
+  gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+  to: address,
+  data: contract.methods.addPosition(322,124).encodeABI()
+}
+
+// 签署交易
+const tx = new Tx(txObject, { chain: 'ropsten', hardfork: 'petersburg' })
+tx.sign(privateKey1)
+
+const serializedTx = tx.serialize()
+const raw = '0x' + serializedTx.toString('hex')
+
+// 广播交易
+web3.eth.sendSignedTransaction(raw, (err, txHash) => {
+  console.log('txHash:', txHash)
+  // 可以去ropsten.etherscan.io查看交易详情
+})
+
+})
+
+// contract.methods.NewOrder().send({ from: "0x4BCA8987e713b882553b5eAD3d1CF85afBDF001e", gas: "3000000" })
+// contract.methods.addPosition(322,124).send({ from: "0x4BCA8987e713b882553b5eAD3d1CF85afBDF001e", gas: "3000000" })
+// contract.methods.RandomNum(132).call((err, result) => { console.log(result) })
+console.log("3")
+// contract.methods.symbol().call((err, result) => { console.log(result) })
+
+    </script>
+
+</body>
+</html>

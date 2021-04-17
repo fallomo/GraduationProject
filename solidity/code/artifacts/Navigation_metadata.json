@@ -1,0 +1,104 @@
+{
+	"compiler": {
+		"version": "0.7.4+commit.3f05b770"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnerSet",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "changeOwner",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/navigation.sol": "Navigation"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/navigation.sol": {
+			"keccak256": "0xd418ae037693768efc8d461733512e4d33334ebe91fd6d860e810100c295f65e",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://1d915af4941cfb1f49bc67b914e33538b3496a313058480c5e0aa9b716fd47c9",
+				"dweb:/ipfs/QmRFZmVSQkgqnk3HdxVcVuQAvDHLUPCRvaudQah5MVNGJG"
+			]
+		},
+		"owner.sol": {
+			"keccak256": "0x034fde64f93e0a4f923d6b072b3976cbf522ddfbc6dcb4fb2ca1337ce010463d",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://d82d51b37b4788f99062bb70b98d1ec07a8c21be1d27b9bdfcbabf4a49adeef1",
+				"dweb:/ipfs/QmbEf98ZChyBBNZQipfRDdvgM7PSrmXHyuiqRhLFYRLjWJ"
+			]
+		}
+	},
+	"version": 1
+}

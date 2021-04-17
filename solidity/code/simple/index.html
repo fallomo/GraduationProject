@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>CryptoZombies front-end</title>
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Include web3.js here -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/web3/1.2.2/web3.min.js"></script>
+    <script type="text/javascript" src="./testabi.js"></script>
+  </head>
+  <body>
+    <div>
+      
+    </div>
+    <script>
+        const myaddress ='0x4BCA8987e713b882553b5eAD3d1CF85afBDF001e';
+        const Web3js = new Web3(window.ethereum);
+        console.log(addABI);
+        var contractAddress = "0x0fD95C6534fD11A96df2D14D0402341949eA1dD4";
+        test = new Web3js.eth.Contract(addABI, contractAddress);
+        function simpleadd(a,b) {
+         return test.methods.add(a,b).call()
+        }
+        function usecount(){
+          return test.methods.retrieve().send({from:myaddress});
+          // return test.methods.retrieve().call();    
+        // simpleadd(27,14)
+        // .then(function(result) {
+        //   console.log("Zombie 15: " + JSON.stringify(result));
+        // });
+        }
+        usecount()
+        .then(function(result) {
+          console.log("Zombie 15: " + JSON.stringify(result));
+        });
+        // test.retrieve().sendTransaction({
+        //         from: deployeAddr
+        //     });
+    </script>
+  </body>
+</html>
+
