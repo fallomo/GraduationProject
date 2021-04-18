@@ -127,16 +127,19 @@
   let latitude1= 23.047508654381208;
   let longitude2= 113.3747961711058;
   let latitude2= 23.047908654381208;
+  //113374599,23047508,113374796,23047908
   let longtitude3=113.3813231234556;
   let latitude3=23.051234123213;
+  //113374599,23047508,113374796,23047908,113381323,23051234
   let res =[]
-  for(let i = 0;i<=90;i++)
-  {
-    res.push(Math.round(getGreatCircleDistance(i,0,i,1)))
-  }
-  console.log(res)
-  console.log(EDistance([0,0],[0,1],red))
-  console.log(getGreatCircleDistance(0,0,0,1))
+  // for(let i = 0;i<=90;i++)
+  // {
+  //   res.push(Math.round(getGreatCircleDistance(i,0,i,1)))
+  // }
+  // console.log(res)
+  // console.log(EDistance([0,0],[0,1],red))
+  console.log(getGreatCircleDistance(0,1,0,0))
 // console.log(EDistance([179,0],[180,1],red))
 
-// console.log(FlatPointToLine(longitude1, latitude1, longitude2,latitude2, longtitude3,latitude3))
+console.log(FlatPointToLine(longitude1, latitude1, longitude2,latitude2, longtitude3,latitude3))
+// console.log(getGreatCircleDistance(latitude1,longitude1,latitude2,longitude2))
