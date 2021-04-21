@@ -3,7 +3,7 @@
     
 
 
-    contract Position{
+    contract Order{
         address Manager;
         
         uint[] Latitude;
@@ -21,9 +21,9 @@
         uint[2] Destination;
         uint _length=1e6;
         //测试网络下地址
-        // address CalcAddress=0x6E3BC20F19f8B6012Be72551701930FC32512994;
+        address CalcAddress=0x6673fCf9E2C75790A86a3332ae9b9C4a4e010927;
         //虚拟机下地址
-        address CalcAddress=0xf8e81D47203A594245E36C48e151709F0C19fBe8;
+        // address CalcAddress=0xf8e81D47203A594245E36C48e151709F0C19fBe8;
         Calc calc=Calc(CalcAddress);
          struct ErrorReport
          {
@@ -45,7 +45,7 @@
         event Created(uint256 OrderIndentifier,uint256 OrderCreatedTime,uint16 OrderStatus);
         event Done(uint256 OrderIndentifier,uint256 OrderTime);
         event GetPosition(uint[] latitude,uint[] Longitude);
-        event RouteOut(uint endlat,uint endlng,uint poilat,uint poilng,uint distance);
+        event RouteOut(uint endlat,uint endlng,uint poilat,uint poilng,uint distance,address Manager);
         
         
         function RandomNum(uint256 Length) private view returns(uint256){
@@ -85,12 +85,13 @@
            {
                ErrorReport memory temp = ErrorReport(startlat,startlng,endlat,endlng,poilat,poilng,block.timestamp);
                report.push(temp);
-                emit RouteOut(endlat,endlng,poilat,poilng,distance);
+                emit RouteOut(endlat,endlng,poilat,poilng,distance,Manager);
                 return 1;
            }
            else return 0;
         }
         
+
         function getPosition()public view returns(uint[]memory,uint[]memory,uint[]memory){
            return (Latitude,Longitude,PositionTime);
         }

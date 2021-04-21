@@ -23,9 +23,9 @@
          if (error) {
              console.log(error);
          }
-         console.log('发送成功')
+         console.log('mail succeed')
      });
  }
   
-sendMail("812925285@qq.com","测试","hello")
+// sendMail("812925285@qq.com","测试","hello")
  module.exports = sendMail;

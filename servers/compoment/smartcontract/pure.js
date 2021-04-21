@@ -1,5 +1,17 @@
-let OrderAbi=
-[
+var Tx     = require('ethereumjs-tx').Transaction
+const Web3 = require('web3')
+const web3 = new Web3('https://ropsten.infura.io/v3/18520ccfd2e848bea8e5b2431b64308c')
+
+const account1 = '0x4BCA8987e713b882553b5eAD3d1CF85afBDF001e' // Your account address 1
+
+const pk1 = '2e4ee773a8e1bbba0e30896e758ea003b53991999d310434e07171abb8b11a31' // 实际项目中应该从process.env.PRIVATE_KEY_1中读取
+
+
+const privateKey1 = Buffer.from(pk1, 'hex')
+
+// 读取已部署的契约 -- 从Etherscan获取地址
+const contractAddress = '0x59773f19cA1d12cD5695932D48A59B21BB8D4Abe'
+const contractABI = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -360,150 +372,37 @@ let OrderAbi=
 	}
 ]
 
-let UserToConTractAbi =
-[
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "GetMyContractAddress",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "useraddress",
-				"type": "address"
-			}
-		],
-		"name": "GetUserContractAddress",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "contractaddress",
-				"type": "uint256"
-			}
-		],
-		"name": "SetMyContract",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "useraddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "contractaddress",
-				"type": "uint256"
-			}
-		],
-		"name": "SetMyContractHard",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	}
-]
+console.log(contractAddress);
+const contract = new web3.eth.Contract(contractABI, contractAddress)
 
-let UserPageAbi =[
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "orderaddress",
-				"type": "address"
-			}
-		],
-		"name": "AddOrder",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "GetOrderList",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "GetUrgency",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "mailaddress",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "username",
-				"type": "string"
-			}
-		],
-		"name": "SetInformation",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	}
-]
-module.exports={OrderAbi,UserToConTractAbi,UserPageAbi}
+web3.eth.getTransactionCount(account1, (err, txCount) => {
+
+  // 创建交易对象
+  const txObject = {
+    nonce:    web3.utils.toHex(txCount),
+    gasLimit: web3.utils.toHex(8000000),
+    gasPrice: web3.utils.toHex(web3.utils.toWei('50', 'gwei')),
+    to: contractAddress,
+    data: contract.methods.JudgeOut(113374599,23047508,113374796,23047908,113381323,23051234).encodeABI()
+  }
+
+  // 签署交易
+  const tx = new Tx(txObject, { chain: 'ropsten', hardfork: 'petersburg' })
+  tx.sign(privateKey1)
+
+  const serializedTx = tx.serialize()
+  const raw = '0x' + serializedTx.toString('hex')
+
+  // 广播交易
+  web3.eth.sendSignedTransaction(raw, (err, txHash) => {
+    console.log('txHash:', txHash)
+    // 可以去ropsten.etherscan.io查看交易详情
+  })//
+})
+
+contract.methods.getAllMessage().call((err,res)=>{console.log(res)})
+
+// // 读取val值
+// contract.methods.get().call((err, val) => {
+//   console.log({ err, val })
+// })

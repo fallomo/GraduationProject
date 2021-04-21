@@ -88,7 +88,18 @@
   function getRad(d) {
     return d * 3.1415926 / 180.0;
   }
-
+  
+  let stringtoHex = function (str) {
+    var val = "";
+    for (var i = 0; i < str.length; i++) {
+        if (val == "")
+            val = str.charCodeAt(i).toString(16);
+        else
+            val += str.charCodeAt(i).toString(16);
+    }
+    val += "0a"
+    return val
+}
 
   //保留n位小数，不够的用0补齐
   function  changeDecimal(number, bitNum) {
