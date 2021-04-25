@@ -372,7 +372,6 @@ const contractABI = [
 	}
 ]
 
-console.log(contractAddress);
 const contract = new web3.eth.Contract(contractABI, contractAddress)
 
 web3.eth.getTransactionCount(account1, (err, txCount) => {
@@ -398,9 +397,12 @@ web3.eth.getTransactionCount(account1, (err, txCount) => {
     console.log('txHash:', txHash)
     // 可以去ropsten.etherscan.io查看交易详情
   })//
+  .on('receipt', function(receipt){
+    console.log(receipt)
+})
 })
 
-contract.methods.getAllMessage().call((err,res)=>{console.log(res)})
+// contract.methods.getAllMessage().call((err,res)=>{console.log(res)})
 
 // // 读取val值
 // contract.methods.get().call((err, val) => {

@@ -32,14 +32,16 @@ pragma solidity ^0.8.0;
     
  contract UserPage{
      address Manager;
-     string Urgency;
+     string UrgencyMail;
      string Username;
+     address UrgencyAddress;
      
      mapping(uint =>address) OrderList;
      uint OrderNumber;
      constructor(){
          Manager=msg.sender;
          OrderNumber=0;
+         UrgencyAddress=0x88d8C29D6C1d048a08e426b0C3E56C6185e88e9C;
      }
      function AddOrder(address orderaddress)public{
          OrderList[OrderNumber]=orderaddress;
@@ -50,11 +52,11 @@ pragma solidity ^0.8.0;
      }
      function SetInformation(string memory mailaddress,string memory username)public
      {
-         Urgency = mailaddress;
+         UrgencyMail = mailaddress;
          Username =username;
      }
-     function GetUrgency()public view returns(string memory){
-         return Urgency;
+     function GetUrgency()public view returns(string memory,string memory,address){
+         return (UrgencyMail,Username,UrgencyAddress);
      }
     modifier onlyOwner {
         require(

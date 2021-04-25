@@ -41,7 +41,8 @@ function numFormat(num,bit) {
     return result.reverse().join("");
   }
 
-let orderlistener=orderevent.events.allEvents(function(error, event){
+let orderlistener=function listern (){
+    orderevent.events.allEvents(function(error, event){
     	console.log(event.event);
         if(event.event=="RouteOut")
         {
@@ -52,7 +53,8 @@ let orderlistener=orderevent.events.allEvents(function(error, event){
             // tool.sendTransaction(account1,privateKey1,account.account2,'test',100);
         }
     })
-
+    console.log("orderlistener ready")
+}
 // tool.sendMethods(account.account1,account.privateKey1,orderaddress,judge)
 // tool.sendMethods(account.account1,account.privateKey1,usertocontractaddress,usertocontract.methods.SetMyContract('0x874B070ECFAd6C6575FB85FB924Ce573b1f6ff98').encodeABI())
 // tool.sendMethods(account1,privateKey1,usertocontractaddress,usertocontract.methods.GetMyContractAddress().encodeABI())
