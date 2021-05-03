@@ -31,11 +31,12 @@ const privateKey1 = Buffer.from(pk1, 'hex');
 // })
 // let start = contract.methods.Starting([113374599,23047508],[113374796,23047908]).encodeABI()
 // let cancal = contract.methods.CancalOrder().encodeABI();
-// let judge = contract.methods.JudgeOut(113374599,23047508,113374796,23047908,113381323,23051234).encodeABI();
-// let addPosition =  contract.methods.addPosition().encodeABI()
-// sendOrderMethods(judge)
-// .then(res=>console.log(res))
-// .catch(err=>console.log(err))
-// console.log("ok")
+let addPosition =  contract.methods.addPosition().encodeABI()
+let judge = contract.methods.JudgeOut(113374599,23047508,113374796,23047908,113381323,23051234).encodeABI();
+sendOrderMethods(judge)
+.then(res=>console.log(res))
+.catch(err=>console.log(err))
+console.log("ok")
 
 module.exports= {contract,wscontract,sendOrderMethods}
+113374599,60047508,113374796,60047908,113381323,60051234

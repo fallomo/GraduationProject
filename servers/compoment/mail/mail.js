@@ -24,7 +24,7 @@
              console.log(error);
          }
          console.log('mail succeed')
-     });
+     });    
  }
   
 // sendMail("812925285@qq.com","测试","hello")

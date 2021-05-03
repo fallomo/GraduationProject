@@ -149,8 +149,49 @@
   // }
   // console.log(res)
   // console.log(EDistance([0,0],[0,1],red))
-  console.log(getGreatCircleDistance(0,1,0,0))
+  // console.log(getGreatCircleDistance(0,1,0,0))
 // console.log(EDistance([179,0],[180,1],red))
+function deleteDot(num){
+    let str = num.toString()
+    let dot = "."
+    let pos =str.indexOf(dot)
+    let arr =str.split("")
+    arr.splice(pos,1)
+    return arr.join('')
 
-console.log(FlatPointToLine(longitude1, latitude1, longitude2,latitude2, longtitude3,latitude3))
+}
+
+for(let i =0;i<40;i++)
+{
+  let a =Math.random()*90;
+  let b =Math.random()*180;
+  let c = a + Math.random();
+  let d = b +Math.random();
+  a=changeDecimal(a, 6)
+  b=changeDecimal(b, 6)
+  c=changeDecimal(c, 6)
+  d=changeDecimal(d, 6)
+  console.log(`${a.toString()},${b},${c},${d}`)
+  console.log(getGreatCircleDistance(a,b,c,d))
+  console.log(" ")
+}
+
+let a =Math.random()*90;
+let b =Math.random()*180;
+// console.log(FlatPointToLine(60047508,113374599,60047908,113604796,60601234,113601323))
+23047508,113374599,23047908,113374796,23051234,113381323
 // console.log(getGreatCircleDistance(latitude1,longitude1,latitude2,longitude2))
+
+// 110604, 110587, 110537, 110452, 110335, 110183, 109998,
+// 109779, 109528, 109242, 108924, 108572, 108187, 107769,
+// 107318, 106835, 106319, 105771, 105190, 104578, 103934,
+// 103258, 102550, 101811, 101042, 100241,  99410,  98549,
+//  97657,  96736,  95786,  94806,  93797,  92760,  91694,
+//  90601,  89480,  88332,  87157,  85955,  84727,  83473,
+//  82194,  80890,  79561,  78208,  76831,  75431,  74008,
+//  72562,  71094,  69605,  68094,  66563,  65011,  63439,
+//  61848,  60239,  58611,  56965,  55301,  53621,  51925,
+//  50213,  48485,  46743,  44986,  43216,  41433,  39636,
+//  37828,  36009,  34178,  32337,  30486,  28626,  26757,
+//  24880,  22996,  21104,  19206,  17302,  15393,  13479,
+//  11561,   9640,   7715,   5788,   3860,   1930,      0

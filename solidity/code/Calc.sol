@@ -55,19 +55,19 @@
     {
         uint x;uint y;uint index;
         if(startlat>endlat){
-            x = startlat - endlat;
+            y = startlat - endlat;
+            index = endlat/1e6;
         } 
         else
         {
-            x = endlat-startlat;
+            y = endlat-startlat;
+            index = startlat/1e6;
         }
         if(startlng>endlng){
-            y =startlng - endlng;
-            index = endlng/1e6;
+            x =startlng - endlng;
         }
         else {
-            y =endlng-startlng;
-            index = startlng/1e6;
+            x =endlng-startlng;
         }
         uint res = sqrtu(x*x*(distanceMapLat[index]**2)+y*y*(distanceLng**2));
         if((x!=0)&&(y!=0))
@@ -81,26 +81,26 @@
     {
         uint x;uint y;uint index;
         if(startlat>endlat){
-            x = startlat - endlat;
+            y = startlat - endlat;
+            index = endlat/1e6;
         } 
         else
         {
-            x = endlat-startlat;
+            y = endlat-startlat;
+            index = startlat/1e6;
         }
         if(startlng>endlng){
-            y =startlng - endlng;
-            index = endlng/1e6;
+            x =startlng - endlng;
         }
         else {
-            y =endlng-startlng;
-            index = startlng/1e6;
+            x =endlng-startlng;
         }
         uint res = sqrtu(x*x*(distanceMapLat[index]**2)+y*y*(distanceLng**2));
         if((x!=0)&&(y!=0))
         {
             return round(res,6);
         }
-        return res;
+        return res*1e6;
     }
     function FlatPointToLine(uint startlat,uint startlng,uint endlat,uint endlng,uint poilat,uint poilng) public view returns(uint)
     {

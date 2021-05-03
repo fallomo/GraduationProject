@@ -65,14 +65,11 @@ function sendTransaction(account,privateKey,address,data,value=0){
                       to: address,
                       data: method
                     }
-                  
                     // 签署交易
                     const tx = new Tx(txObject, { chain: 'ropsten', hardfork: 'petersburg' })
                     tx.sign(privateKey)
-                  
                     const serializedTx = tx.serialize()
                     const raw = '0x' + serializedTx.toString('hex')
-                  
                     // 广播交易
                     web3.eth.sendSignedTransaction(raw, (err, txHash) => {
                       console.log('txHash:', txHash)
