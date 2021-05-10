@@ -156,3 +156,25 @@
      function getPointToPointDistance (uint startlat,uint startlng,uint endlat,uint endlng) external view returns(uint distance);
      function FlatPointToLine(uint startlat,uint startlng,uint endlat,uint endlng,uint poilat,uint poilng) external view returns(uint);
 }
+
+contract UserPage
+{
+     address Manager;  //记录所有者地址
+     string UrgencyMail;  //记录紧急联系人电子邮箱
+     string Username;   //记录所有者姓名昵称
+     address UrgencyAddress; //记录紧急联系人地址
+
+        struct ErrorReport
+         {
+             uint startlat;	//用于记录出发位置
+             uint startlng;
+             uint endlat;  //用于记录原定目标
+             uint endlng;
+             uint poilat;   //用于记录现在位置
+             uint poilng;
+             uint errorTime;  //用于记录事件发生的时间
+         }
+         
+         ErrorReport[] report;  //结构体数组，用于容纳复数的错误报告
+
+}
