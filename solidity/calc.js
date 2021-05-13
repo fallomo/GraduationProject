@@ -151,35 +151,35 @@
   // console.log(EDistance([0,0],[0,1],red))
   // console.log(getGreatCircleDistance(0,1,0,0))
 // console.log(EDistance([179,0],[180,1],red))
-function deleteDot(num){
-    let str = num.toString()
-    let dot = "."
-    let pos =str.indexOf(dot)
-    let arr =str.split("")
-    arr.splice(pos,1)
-    return arr.join('')
+// function deleteDot(num){
+//     let str = num.toString()
+//     let dot = "."
+//     let pos =str.indexOf(dot)
+//     let arr =str.split("")
+//     arr.splice(pos,1)
+//     return arr.join('')
 
-}
+// }
 
-for(let i =0;i<40;i++)
-{
-  let a =Math.random()*90;
-  let b =Math.random()*180;
-  let c = a + Math.random();
-  let d = b +Math.random();
-  a=changeDecimal(a, 6)
-  b=changeDecimal(b, 6)
-  c=changeDecimal(c, 6)
-  d=changeDecimal(d, 6)
-  console.log(`${a.toString()},${b},${c},${d}`)
-  console.log(getGreatCircleDistance(a,b,c,d))
-  console.log(" ")
-}
+// for(let i =0;i<40;i++)
+// {
+//   let a =Math.random()*90;
+//   let b =Math.random()*180;
+//   let c = a + Math.random();
+//   let d = b +Math.random();
+//   a=changeDecimal(a, 6)
+//   b=changeDecimal(b, 6)
+//   c=changeDecimal(c, 6)
+//   d=changeDecimal(d, 6)
+//   console.log(`${deleteDot(a)},${deleteDot(b)},${deleteDot(c)},${deleteDot(d)},${getGreatCircleDistance(a,b,c,d)}`)
+// }
 
-let a =Math.random()*90;
-let b =Math.random()*180;
-// console.log(FlatPointToLine(60047508,113374599,60047908,113604796,60601234,113601323))
-23047508,113374599,23047908,113374796,23051234,113381323
+// let a =Math.random()*90;
+// let b =Math.random()*180;
+console.log(FlatPointToLine(60.047508,113.374599,60.047908,113.374796,60.046234,113.375323))
+// 23047508,113374599,23047908,113374796,23051234,113381323
+//[60047508,113374599],[60047908,113374796],60046234,113375323
+//60047508,113374599,60047908,113374796,60046234,113375323
 // console.log(getGreatCircleDistance(latitude1,longitude1,latitude2,longitude2))
 
 // 110604, 110587, 110537, 110452, 110335, 110183, 109998,

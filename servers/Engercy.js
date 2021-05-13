@@ -4,7 +4,7 @@ const abi = require('./compoment/assets/Abi')
 const Address = require('./compoment/assets/Address')
 let tool = require('./compoment/smartcontract/common')
 
-let orderaddress = '0x59773f19cA1d12cD5695932D48A59B21BB8D4Abe';
+let orderaddress = Address.OrderAddress;
 let usertocontractaddress = Address.UserToContractAddress;
 let userpageaddress = Address.UserPageAddress;
 

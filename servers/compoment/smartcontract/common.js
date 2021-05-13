@@ -76,7 +76,7 @@ function sendTransaction(account,privateKey,address,data,value=0){
                       if(!err) resolve(txHash)
                       else reject(err);
                     })
-                  })
+                  }).catch()
                 }
                   )}
 

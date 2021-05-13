@@ -35,13 +35,18 @@ app.get('/', (req, res) => {
 const succ = {status:1}
 
 app.post('/api/AddPosition',async (req, res) => {
-	tool.sendMethods(account1,privateKey1,orderaddress,order.methods.addPosition(req.body.latitude,req.body.longitude).encodeABI())
+	try  {
+    tool.sendMethods(account1,privateKey1,orderaddress,order.methods.addPosition(req.body.latitude,req.body.longitude).encodeABI())
   .then(res.send(succ))
+}
+  catch(err){ }
   console.log('AddPosition')
 })
 app.post('/api/JudgeOut',async (req, res) => {
+  try{
 	tool.sendMethods(account1,privateKey1,orderaddress,order.methods.JudgeOut(req.body.startlat,req.body.startlng,req.body.endlat,req.body.endlng,req.body.poilat,req.body.poilng).encodeABI())
   .then(res.send(succ))
+  }catch(err){}
   console.log('JudgeOut')
 })
 app.post('/api/NewOrder',async (req, res) => {
